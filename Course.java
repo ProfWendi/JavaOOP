@@ -40,7 +40,6 @@ public class Course implements Comparable<Course> {
         return String.format("%-9s: %6.2f", code, grade);
     }
     
-    // todo: hash
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
@@ -50,10 +49,17 @@ public class Course implements Comparable<Course> {
         
         if (obj instanceof Course) {
             Course c = (Course)obj;
-            return c.getCode().equalsIgnoreCase(code);
+            return c.getCode().equals(code);
         } else
             return false;
     }
+	@Override
+	public int hashCode() {
+		final int prime = 89;
+		int result = 5;
+		result = result * prime + code.hashCode();
+		return result;
+	}
 
     @Override
     public int compareTo(Course c) {
